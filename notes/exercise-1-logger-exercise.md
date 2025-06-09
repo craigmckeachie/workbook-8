@@ -1,23 +1,29 @@
-## 🧪 EXERCISE 1 – Logger Exercise
+
+
+
+# ✅ EXERCISE 1 – Log4j2 Logging in a Maven Java Project (Using IntelliJ IDEA)
 
 ---
 
-### ✅ Step 1: Create a New Maven Project in IntelliJ
+### 🧱 Step 1: Create a New Empty Maven Project
 
 1. **Open IntelliJ IDEA**
-2. Go to **File > New > Project**
-3. Select **Maven** on the left sidebar
-4. Uncheck **"Create from archetype"** unless you want a template
-5. Click **Next**
-6. Fill in:
+2. Click **"New Project"** (or go to **File > New > Project**)
+3. In the **New Project** screen:
 
-   - **GroupId**: e.g., `com.example`
-   - **ArtifactId**: e.g., `logger-exercise`
-   - **Version**: leave default
+   * Select **Maven**
+   * Do **not** check "Add sample code"
+   * Make sure a valid **JDK** is selected (e.g., Java 17 or higher)
+4. Click **Next**
+5. Fill in the fields:
 
-7. Click **Finish**
+   * **GroupId**: `com.example`
+   * **ArtifactId**: `logging-demo`
+   * **Version**: leave as-is
+   * **Base package**: leave blank (you’ll create it manually)
+6. Click **Create**
 
-IntelliJ will create a project structure like:
+You should now see a minimal project structure like this:
 
 ```
 logging-demo/
@@ -25,18 +31,22 @@ logging-demo/
 └── src/
     ├── main/
     │   ├── java/
-    │   │   └── com/
-    │   │       └── example/
-    │   │           └── App.java
     │   └── resources/
 ```
 
 ---
 
-### ✅ Step 2: Replace the Code in `App.java`
+### 🛠 Step 2: Create the Package and `App.java` File
 
-1. Navigate to `src/main/java/com/example/App.java`
-2. Replace its contents with the following:
+1. In the **Project view**, navigate to:
+   `src/main/java`
+2. Right-click the `java` folder → **New > Package**
+
+   * Name it: `com.example`
+3. Right-click on the new `com.example` package → **New > Java Class**
+
+   * Name it: `App`
+4. Replace the contents of `App.java` with this:
 
 ```java
 package com.example;
@@ -67,10 +77,10 @@ public class App {
 
 ---
 
-### ✅ Step 3: Add Log4j2 Dependencies to `pom.xml`
+### 📦 Step 3: Add Log4j2 Dependencies to `pom.xml`
 
-1. Open `pom.xml`
-2. Inside the `<dependencies>` section, paste the following:
+1. Open the `pom.xml` file (in the root of the project)
+2. Add the following inside the `<dependencies>` tag:
 
 ```xml
 <dependencies>
@@ -87,17 +97,18 @@ public class App {
 </dependencies>
 ```
 
-3. IntelliJ should automatically sync the project. If not:
-
-   - Click the **Maven** tab on the right → click the **refresh icon**
-   - OR press **Cmd + Shift + O** (Mac) or **Ctrl + Shift + O** (Windows/Linux) to import changes
+3. IntelliJ will prompt you to **import Maven changes**. Click **“Load Maven Changes”** or use the **refresh button** in the Maven tab.
 
 ---
 
-### ✅ Step 4: Create the Log4j2 Configuration File
+### 🗂 Step 4: Create the `log4j2.properties` File
 
-1. In `src/main/`, right-click `resources` → **New > File** → name it: `log4j2.properties`
-2. Paste the following configuration:
+1. In the **Project view**, go to:
+   `src/main/resources`
+2. Right-click the `resources` folder → **New > File**
+
+   * Name it: `log4j2.properties`
+3. Paste the following configuration into the file:
 
 ```properties
 # Status logging for internal Log4j2 events
@@ -129,48 +140,56 @@ appender.file.policies.time.interval = 1
 appender.file.policies.time.modulate = true
 ```
 
-> 💡 **Ensure** `resources` is marked as a _Resources Root_:
-
-- Right-click on `resources` → **Mark Directory as > Resources Root**
+> ✅ Make sure `resources` is marked as a **Resources Root**:
+> Right-click the `resources` folder → **Mark Directory as > Resources Root**
 
 ---
 
-### ✅ Step 5: Run the App
+### ▶️ Step 5: Run the App
 
 1. Right-click `App.java` → **Run 'App.main()'**
-2. You should see logs in the console like:
+2. You should see output in the console like:
 
 ```
-2025-06-06 10:15:00 DEBUG App:10 - This is debug : ☕
-2025-06-06 10:15:00 INFO  App:13 - This is info : ☕
-2025-06-06 10:15:00 WARN  App:15 - This is warn : ☕
-2025-06-06 10:15:00 ERROR App:16 - This is error : ☕
-2025-06-06 10:15:00 FATAL App:17 - This is fatal : ☕
+2025-06-06 10:30:00 DEBUG App:10 - This is debug : ☕
+2025-06-06 10:30:00 INFO  App:13 - This is info : ☕
+2025-06-06 10:30:00 WARN  App:15 - This is warn : ☕
+2025-06-06 10:30:00 ERROR App:16 - This is error : ☕
+2025-06-06 10:30:00 FATAL App:17 - This is fatal : ☕
 ```
 
-3. A file will also be created at: `log/application.log` with the same content.
+3. A log file will also be created here:
+   `log/application.log`
 
 ---
 
-### ✅ Bonus: Adjust Logging Level
+### 🔧 BONUS: Change the Logging Level
 
-To filter out lower-level logs (like DEBUG), change this line in the `log4j2.properties`:
+If you want to show only messages from INFO and above, change this line in `log4j2.properties`:
 
 ```properties
 rootLogger.level = INFO
 ```
 
-Then only INFO and above will print.
+Valid levels (from lowest to highest): `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`
 
 ---
 
-### 🚨 Common Issues Checklist
+### 🧯 Troubleshooting Tips
 
-| Problem                       | Possible Fix                                                    |
-| ----------------------------- | --------------------------------------------------------------- |
-| No logs show up in console    | Make sure `log4j2.properties` is under `src/main/resources`     |
-| Logs only show WARN and above | Set `rootLogger.level = TRACE` or `DEBUG`                       |
-| Build errors on LogManager    | Ensure both `log4j-core` and `log4j-api` are added to `pom.xml` |
-| No log file created           | Check that `log/` directory exists or is writable               |
+| Problem                            | Fix                                                                               |
+| ---------------------------------- | --------------------------------------------------------------------------------- |
+| No logs appear                     | Ensure `log4j2.properties` is in `src/main/resources`                             |
+| Only WARN and above logs show      | Check that `rootLogger.level` is set to `TRACE` or `DEBUG`                        |
+| `LogManager` or `Logger` not found | Make sure Maven dependencies were added and Maven was reloaded                    |
+| Log file not created               | Make sure the app has permission to create a `log/` folder, or create it manually |
 
 ---
+
+Let me know if you’d like this as:
+
+* A **PDF handout**
+* A **Markdown version** for GitHub or LMS
+* A **starter IntelliJ project ZIP file**
+
+I can generate any of those for you.
