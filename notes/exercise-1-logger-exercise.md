@@ -1,6 +1,3 @@
-
-
-
 # ✅ EXERCISE 1 – Log4j2 Logging in a Maven Java Project (Using IntelliJ IDEA)
 
 ---
@@ -11,16 +8,18 @@
 2. Click **"New Project"** (or go to **File > New > Project**)
 3. In the **New Project** screen:
 
-   * Select **Maven**
-   * Do **not** check "Add sample code"
-   * Make sure a valid **JDK** is selected (e.g., Java 17 or higher)
+   - Select **Maven**
+   - Do **not** check "Add sample code"
+   - Make sure a valid **JDK** is selected (e.g., Java 17 or higher)
+
 4. Click **Next**
 5. Fill in the fields:
 
-   * **GroupId**: `com.example`
-   * **ArtifactId**: `logging-demo`
-   * **Version**: leave as-is
-   * **Base package**: leave blank (you’ll create it manually)
+   - **GroupId**: `com.example`
+   - **ArtifactId**: `logging-demo`
+   - **Version**: leave as-is
+   - **Base package**: leave blank (you’ll create it manually)
+
 6. Click **Create**
 
 You should now see a minimal project structure like this:
@@ -42,10 +41,12 @@ logging-demo/
    `src/main/java`
 2. Right-click the `java` folder → **New > Package**
 
-   * Name it: `com.example`
+   - Name it: `com.example`
+
 3. Right-click on the new `com.example` package → **New > Java Class**
 
-   * Name it: `App`
+   - Name it: `App`
+
 4. Replace the contents of `App.java` with this:
 
 ```java
@@ -107,7 +108,8 @@ public class App {
    `src/main/resources`
 2. Right-click the `resources` folder → **New > File**
 
-   * Name it: `log4j2.properties`
+   - Name it: `log4j2.properties`
+
 3. Paste the following configuration into the file:
 
 ```properties
@@ -139,9 +141,6 @@ appender.file.policies.time.type = TimeBasedTriggeringPolicy
 appender.file.policies.time.interval = 1
 appender.file.policies.time.modulate = true
 ```
-
-> ✅ Make sure `resources` is marked as a **Resources Root**:
-> Right-click the `resources` folder → **Mark Directory as > Resources Root**
 
 ---
 
@@ -188,8 +187,8 @@ Valid levels (from lowest to highest): `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`
 
 Let me know if you’d like this as:
 
-* A **PDF handout**
-* A **Markdown version** for GitHub or LMS
-* A **starter IntelliJ project ZIP file**
+- A **PDF handout**
+- A **Markdown version** for GitHub or LMS
+- A **starter IntelliJ project ZIP file**
 
 I can generate any of those for you.
