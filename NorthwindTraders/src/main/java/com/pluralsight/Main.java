@@ -27,6 +27,7 @@ public class Main {
         //execute the statement/query
         ResultSet resultSet =  preparedStatement.executeQuery();
 
+        //print header row
         System.out.printf("%-4s %-40s %15s %10s%n", "Id", "Product Name", "Price", "Stock");
         System.out.println("_________________________________________________________________________________");
 
@@ -37,11 +38,8 @@ public class Main {
             Double unitPrice = resultSet.getDouble("unitprice");
             int unitsInStock = resultSet.getInt("unitsinstock");
 
-
+            //print row
             System.out.printf("%-4d %-40s %15.2f %10d%n", productId, productName, unitPrice, unitsInStock);
-
-
-
         }
 
     }
