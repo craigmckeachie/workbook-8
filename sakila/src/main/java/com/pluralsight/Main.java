@@ -8,9 +8,13 @@ public class Main {
         String password = args[1];
 
 
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
             //create a connection
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila",username, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila",username, password);
             System.out.println(connection);
 
             //create a SQL statement/query
@@ -18,10 +22,10 @@ public class Main {
                          select * 
                          from film;
                         """;
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
 
             //execute the statement/query
-            ResultSet resultSet =  preparedStatement.executeQuery();
+            resultSet =  preparedStatement.executeQuery();
 
             //print header row
             System.out.printf("%-4s %-40s %10s%n", "Id", "Title", "Release Year");
@@ -43,6 +47,28 @@ public class Main {
             //display error message for the developer
             e.printStackTrace();
         } finally {
+            // close the resources
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
