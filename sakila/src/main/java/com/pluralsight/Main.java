@@ -44,11 +44,7 @@ public class Main {
                     //print row
                     System.out.printf("%-4d %-40s %10d%n", id, title, releaseYear);
                 }
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-
 
         } catch (SQLException e) {
             //display user friendly error message
