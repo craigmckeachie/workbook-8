@@ -33,3 +33,14 @@
     - create
     - update
     - delete
+
+
+6/11/2025
+Exercise 1
+- NorthwindTraders
+1. display all products using a prepared statement
+2. add a try catch block with a resource block to autoclose: connection, preparedstatement, resultset
+3. search products use a placeholder ? to search for product by what it starts with
+   - be sure to autoclose everything using resource block
+   - you will need to use two nested try blocks
+   - use this example: https://github.com/craigmckeachie/workbook-8/blob/main/sakila/src/main/java/com/pluralsight/Main.java
