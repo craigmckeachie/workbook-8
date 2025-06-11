@@ -34,10 +34,12 @@
     - update
     - delete
 
-
 6/11/2025
-Exercise 1
+
+## Exercise 1
+
 - NorthwindTraders
+
 1. display all products using a prepared statement
 2. add a try catch block with a resource block to autoclose: connection, preparedstatement, resultset
 3. search products use a placeholder ? to search for product by what it starts with
