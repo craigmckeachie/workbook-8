@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -9,6 +11,13 @@ public class Main {
     public static void main(String[] args) {
         String username = args[0];
         String password = args[1];
+
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl("jdbc:mysql://localhost:3306/sakila");
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Search for films that start with: ");
         String searchTerm = scanner.nextLine() + "%";
@@ -21,7 +30,7 @@ public class Main {
 
         try (
                 //create a connection
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", username, password);
+                Connection connection = dataSource.getConnection();
                 //create a SQL statement
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
 
