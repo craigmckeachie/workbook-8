@@ -65,6 +65,7 @@
   #### Notes
   - use best practices: datasource, try catch(es) with resource sections, use a dao class that returns data as a model
   -  Use sakila as a best practice example
+     -  https://github.com/craigmckeachie/workbook-8/blob/main/sakila/src/main/java/com/pluralsight/Main.java
   -  stretch goals or additional practice: do the same thing with the customers table
 
 #### Example Interface
@@ -87,7 +88,7 @@ public class ProductDao
     void update(int productId, Product product){
 
     }
-    
+
     void delete(int productId){
 
     }
