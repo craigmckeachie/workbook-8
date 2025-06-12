@@ -4,7 +4,6 @@ import com.pluralsight.data.FilmDAO;
 import com.pluralsight.model.Film;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,13 +20,32 @@ public class Main {
         dataSource.setPassword(password);
 
 
+        displayAllFilmsScreen(dataSource);
+        displayFilmSearchScreen(dataSource);
+
+    }
+
+    private static void displayAllFilmsScreen(BasicDataSource dataSource) {
+        FilmDAO filmDAO = new FilmDAO(dataSource);
+        List<Film> films = filmDAO.getAll();
+
+        //print header row
+        System.out.printf("%-4s %-40s %10s%n", "Id", "Title", "Release Year");
+        System.out.println("_________________________________________________________________________________");
+
+        for (Film film:films){
+            System.out.printf("%-4d %-40s %10d%n", film.getFilmId(), film.getTitle(), film.getReleaseYear());
+        }
+    }
+
+    private static void displayFilmSearchScreen(BasicDataSource dataSource) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Search for films that start with: ");
         String searchTerm = scanner.nextLine() + "%";
 
         FilmDAO filmDAO = new FilmDAO(dataSource);
         List<Film> films = filmDAO.search(searchTerm);
-        
+
         //print header row
         System.out.printf("%-4s %-40s %10s%n", "Id", "Title", "Release Year");
         System.out.println("_________________________________________________________________________________");
