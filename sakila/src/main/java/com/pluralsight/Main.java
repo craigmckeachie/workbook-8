@@ -22,7 +22,8 @@ public class Main {
 
 //        displayAllFilmsScreen(dataSource);
 //        displayFilmSearchScreen(dataSource);
-        displayCreateFilmScreen(dataSource);
+//        displayCreateFilmScreen(dataSource);
+        displayUpdateFilmScreen(dataSource);
     }
 
 
@@ -31,6 +32,16 @@ public class Main {
 
         FilmDAO filmDAO = new FilmDAO(dataSource);
         film = filmDAO.create(film);
+
+        System.out.printf("%-4d %-40s %10d%n", film.getFilmId(), film.getTitle(), film.getReleaseYear());
+
+    }
+
+    private static void displayUpdateFilmScreen(BasicDataSource dataSource) {
+        Film film = new Film(1004, "SUPER/MAN", 2024);
+
+        FilmDAO filmDAO = new FilmDAO(dataSource);
+        film = filmDAO.update(film.getFilmId(), film);
 
         System.out.printf("%-4d %-40s %10d%n", film.getFilmId(), film.getTitle(), film.getReleaseYear());
 

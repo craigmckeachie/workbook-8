@@ -35,4 +35,16 @@ public class Film {
         this.filmId = filmId;
     }
 
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
+    }
+
 }

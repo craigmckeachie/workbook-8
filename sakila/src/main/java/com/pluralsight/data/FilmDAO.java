@@ -107,8 +107,7 @@ public class FilmDAO {
 
 
         // Create the connection and prepared statement
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = dataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             // Set parameters in the preparedStatement
             preparedStatement.setString(1, film.getTitle());
             preparedStatement.setInt(2, film.getReleaseYear());
@@ -122,10 +121,41 @@ public class FilmDAO {
                 // Iterate through the primary keys that were generated
                 while (keys.next()) {
                     int id = keys.getInt(1);
-                    System.out.printf("%d key was added\n", id );
+                    System.out.printf("%d key was added\n", id);
                     film.setFilmId(id);
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return film;
+    }
+
+
+    public Film update(int filmId, Film film) {
+        film.setFilmId(filmId);
+        String sql = """
+                update film
+                set
+                	title = ?,
+                    release_year = ?,
+                    language_id = ?
+                where film_id = ?;
+                """;
+
+        // Create the connection and prepared statement
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            // Set two parameters in the preparedStatement
+            preparedStatement.setString(1, film.getTitle());
+            preparedStatement.setLong(2, film.getReleaseYear());
+            preparedStatement.setLong(3, film.getLanguageId());
+            preparedStatement.setLong(4, filmId);
+
+            // Execute the preparedStatement
+            int rows = preparedStatement.executeUpdate();
+            // Display the number of rows that were updated
+            System.out.printf("Rows updated %d\n", rows);
         } catch (SQLException e) {
             e.printStackTrace();
         }
