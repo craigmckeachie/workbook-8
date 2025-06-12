@@ -27,9 +27,7 @@ public class Main {
 
 
     private static void displayCreateFilmScreen(BasicDataSource dataSource) {
-        Film film = new Film();
-        film.setTitle("USUAL SUSPECTS");
-        film.setLanguageId(1);
+        Film film = new Film(0, "SPIDER-MAN: NO WAY HOME", 2021);
 
         FilmDAO filmDAO = new FilmDAO(dataSource);
         film = filmDAO.create(film);

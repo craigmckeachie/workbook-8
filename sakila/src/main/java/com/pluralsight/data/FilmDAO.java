@@ -94,12 +94,13 @@ public class FilmDAO {
                  INSERT INTO film
                  (
                  `title`,
+                 `release_year`,
                  `language_id`
                  )
                  VALUES
                  (
-                  ?
-                 ,
+                  ?,
+                  ?,
                   ?
                  );
                 """;
@@ -110,7 +111,8 @@ public class FilmDAO {
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             // Set parameters in the preparedStatement
             preparedStatement.setString(1, film.getTitle());
-            preparedStatement.setInt(2, film.getLanguageId());
+            preparedStatement.setInt(2, film.getReleaseYear());
+            preparedStatement.setInt(3, film.getLanguageId());
             // Execute the preparedStatement
             int rows = preparedStatement.executeUpdate();
             // Display the number of rows that were updated
