@@ -3,10 +3,7 @@ package com.pluralsight.data;
 import com.pluralsight.model.Film;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,5 +87,46 @@ public class FilmDAO {
             e.printStackTrace();
         }
         return films;
+    }
+
+    public Film create(Film film) {
+        String sql = """
+                 INSERT INTO film
+                 (
+                 `title`,
+                 `language_id`
+                 )
+                 VALUES
+                 (
+                  ?
+                 ,
+                  ?
+                 );
+                """;
+
+
+        // Create the connection and prepared statement
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            // Set parameters in the preparedStatement
+            preparedStatement.setString(1, film.getTitle());
+            preparedStatement.setInt(2, film.getLanguageId());
+            // Execute the preparedStatement
+            int rows = preparedStatement.executeUpdate();
+            // Display the number of rows that were updated
+            System.out.printf("Rows updated %d\n", rows);
+            // Get the result containing primary key(s)
+            try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
+                // Iterate through the primary keys that were generated
+                while (keys.next()) {
+                    int id = keys.getInt(1);
+                    System.out.printf("%d key was added\n", id );
+                    film.setFilmId(id);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return film;
     }
 }

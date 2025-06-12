@@ -20,8 +20,21 @@ public class Main {
         dataSource.setPassword(password);
 
 
-        displayAllFilmsScreen(dataSource);
-        displayFilmSearchScreen(dataSource);
+//        displayAllFilmsScreen(dataSource);
+//        displayFilmSearchScreen(dataSource);
+        displayCreateFilmScreen(dataSource);
+    }
+
+
+    private static void displayCreateFilmScreen(BasicDataSource dataSource) {
+        Film film = new Film();
+        film.setTitle("USUAL SUSPECTS");
+        film.setLanguageId(1);
+
+        FilmDAO filmDAO = new FilmDAO(dataSource);
+        film = filmDAO.create(film);
+
+        System.out.printf("%-4d %-40s %10d%n", film.getFilmId(), film.getTitle(), film.getReleaseYear());
 
     }
 
