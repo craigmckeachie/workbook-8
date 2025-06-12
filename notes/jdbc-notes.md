@@ -46,3 +46,51 @@
    - be sure to autoclose everything using resource block
    - you will need to use two nested try blocks
    - use this example: https://github.com/craigmckeachie/workbook-8/blob/main/sakila/src/main/java/com/pluralsight/Main.java
+  
+  ## NorthwindTraders Example
+
+  Get confident doing all CRUD operations on a table using JDBC best practices from Java code.
+
+
+
+
+  ### Menu
+  1. All products
+  2. Search products
+  3. Add product
+  4. Update product
+  5. Delete product
+
+
+  #### Notes
+  - use best practices: datasource, try catch(es) with resource sections, use a dao class that returns data as a model
+  -  Use sakila as a best practice example
+  -  stretch goals or additional practice: do the same thing with the customers table
+
+#### Example Interface
+
+```java
+public class ProductDao
+{
+    List<Product> getAll(){
+
+    }
+    
+    List<Product> search(String searchTerm){
+
+    }
+    
+    Product create(Product product){
+
+    }
+    
+    void update(int productId, Product product){
+
+    }
+    
+    void delete(int productId){
+
+    }
+}
+
+```
