@@ -1,9 +1,9 @@
 package com.pluralsight.model;
 
 public class Film {
-    int filmId;
-    String title;
-    int releaseYear;
+    private int filmId;
+    private String title;
+    private int releaseYear;
 
     public Film(int filmId, String title, int releaseYear) {
         this.filmId = filmId;
