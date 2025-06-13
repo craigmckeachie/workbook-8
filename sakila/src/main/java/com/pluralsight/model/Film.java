@@ -6,8 +6,6 @@ public class Film {
     private int releaseYear;
     private int languageId;
 
-
-
     public Film(int filmId, String title, int releaseYear) {
         this.filmId = filmId;
         this.title = title;
