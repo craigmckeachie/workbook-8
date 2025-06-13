@@ -23,7 +23,9 @@ public class Main {
 //        displayAllFilmsScreen(dataSource);
 //        displayFilmSearchScreen(dataSource);
 //        displayCreateFilmScreen(dataSource);
-        displayUpdateFilmScreen(dataSource);
+//        displayUpdateFilmScreen(dataSource);
+          displayDeleteFilmScreen(dataSource);
+
     }
 
 
@@ -44,6 +46,15 @@ public class Main {
         film = filmDAO.update(film.getFilmId(), film);
 
         System.out.printf("%-4d %-40s %10d%n", film.getFilmId(), film.getTitle(), film.getReleaseYear());
+
+    }
+
+    private static void displayDeleteFilmScreen(BasicDataSource dataSource) {
+
+        FilmDAO filmDAO = new FilmDAO(dataSource);
+        filmDAO.delete(1005);
+
+        System.out.print("Successfully deleted film.");
 
     }
 

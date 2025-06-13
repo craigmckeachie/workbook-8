@@ -131,7 +131,6 @@ public class FilmDAO {
         return film;
     }
 
-
     public Film update(int filmId, Film film) {
         film.setFilmId(filmId);
         String sql = """
@@ -144,8 +143,7 @@ public class FilmDAO {
                 """;
 
         // Create the connection and prepared statement
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (Connection connection = dataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             // Set two parameters in the preparedStatement
             preparedStatement.setString(1, film.getTitle());
             preparedStatement.setLong(2, film.getReleaseYear());
@@ -160,5 +158,25 @@ public class FilmDAO {
             e.printStackTrace();
         }
         return film;
+    }
+
+    public void delete(int filmId) {
+        String sql = """
+                delete from film
+                where film_id = ?;
+                """;
+
+        // Create the connection and prepared statement
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            // Set parameters in the preparedStatement
+            preparedStatement.setInt(1, filmId);
+            // Execute the preparedStatement
+            int rows = preparedStatement.executeUpdate();
+            // Display the number of rows that were updated
+            System.out.printf("Rows deleted %d\n", rows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
